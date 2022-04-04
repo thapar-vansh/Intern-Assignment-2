@@ -17,7 +17,7 @@ export const verifyUser = async (
     req.userToken = decoded as (string | number)[]
     const user = await getUserByUserId(req.userToken['userId'])
     if (user === null) {
-      return res.status(404).send('User not in database. Please register')
+      return res.status(403).send('User not in database. Please register')
     }
   } catch (err) {
     console.log(err)

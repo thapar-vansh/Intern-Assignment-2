@@ -1,33 +1,34 @@
 import bcrypt from 'bcrypt'
-import { QueryResult } from 'pg'
 import jwt from 'jsonwebtoken'
+import { QueryResult } from 'pg'
 import { getPlayersFromDb } from '../database/players.db'
-import {
-  getUserbyUsername,
-  addUserToDb,
-} from '../database/users.db'
+import { getUserbyUsername, addUserToDb } from '../database/users.db'
 
-export const getAllPlayers = async () => {
-  const players = await getPlayersFromDb() 
-  console.log(players)
-  return players
+export const getAllPlayers = async (): Promise<string[]> => {
+  const players: QueryResult = await getPlayersFromDb()
+  return players.rows
 }
 
-export const registerUser = async (username: string, password: string) => {
+export const registerUser = async (
+  username: string,
+  password: string
+): Promise<boolean> => {
   const hashedPassword: string = await bcrypt.hash(password, 10)
-  const user: QueryResult | string[] = await getUserbyUsername(username)
-  console.log(user)
-  if (user[0]) {
+  const user: QueryResult = await getUserbyUsername(username)
+  if (user.rowCount > 0) {
     return true
   }
-  await addUserToDb(username, hashedPassword)
+  addUserToDb(username, hashedPassword)
 }
 
-export const loginUser = async (username: string, password: string) => {
-  const loginResult = await getUserbyUsername(username)
-  if (loginResult[0]) {
-    if (await bcrypt.compare(password, loginResult[0].password)) {
-      const userId: number = loginResult[0].id
+export const loginUser = async (
+  username: string,
+  password: string
+): Promise<string> => {
+  const loginResult: QueryResult = await getUserbyUsername(username)
+  if (loginResult.rowCount > 0) {
+    if (await bcrypt.compare(password, loginResult.rows[0].password)) {
+      const userId: number = loginResult.rows[0].id
       const token: string = generateToken(userId)
       return token
     } else {

@@ -5,9 +5,12 @@ import {
   loginUser,
 } from '../services/indexService'
 
-export const getPlayers = async (req: Request, res: Response) => {
+export const getPlayers = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
-    const result = (await getAllPlayers()) as string[]
+    const result: string[] = await getAllPlayers()
     return res.status(200).send(result)
   } catch (e) {
     console.log(e)
@@ -15,7 +18,10 @@ export const getPlayers = async (req: Request, res: Response) => {
   }
 }
 
-export const register = async (req: Request, res: Response) => {
+export const register = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const { username, password } = req.body
   if (!username || !password) {
     return res.status(422).send('Input required')
@@ -46,7 +52,7 @@ export const register = async (req: Request, res: Response) => {
   }
 }
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response): Promise<Response> => {
   const { username, password } = req.body
   if (!username || !password) {
     return res.status(422).send('Input required')
