@@ -12,7 +12,7 @@ export const addPlayers = async (
   res: Response
 ): Promise<Response> => {
   const { name, country } = req.body
-  if (!name || !country) {
+  if (!name && !country) {
     return res.status(422).send('Input required')
   }
   try {
@@ -33,7 +33,7 @@ export const updatePlayers = async (
   res: Response
 ): Promise<Response> => {
   const { id, name, country } = req.body
-  if (!id || !name || !country) {
+  if (!id && (!name || !country)) {
     return res.status(422).send('Input required')
   } else if (typeof id === 'string') {
     return res.status(400).send('Enter valid id')

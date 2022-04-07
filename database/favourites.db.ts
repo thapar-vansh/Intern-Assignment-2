@@ -21,7 +21,6 @@ export const getFavPlayersFromDb = (userId: number): Promise<QueryResult> =>
           WHERE user_id = $1`,
     [userId]
   ) as Promise<QueryResult>
-//return favPlayers.rowCount > 0 ? favPlayers.rows : []
 
 export const deleteFavPlayerFromDb = async (
   id: number,
@@ -35,19 +34,13 @@ export const deleteFavPlayerFromDb = async (
   )
 }
 
-export const checkDuplicateFavFromDb = async (
+export const checkDuplicateFavFromDb = (
   id: number,
   userId: number
-): Promise<QueryResult> => {
-  const duplicateFav = (await query(
+): Promise<QueryResult> =>
+  query(
     `SELECT player_id
         FROM favourites
         WHERE player_id = $1 AND user_id = $2`,
     [id, userId]
-  )) as Promise<QueryResult>
-  if ((await duplicateFav).rows[0]) {
-    return (await duplicateFav).rows[0]
-  }
-  return null
-  //return duplicateFav.rowCount > 0 ? duplicateFav.rows : null
-}
+  ) as Promise<QueryResult>

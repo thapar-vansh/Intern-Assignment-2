@@ -50,8 +50,3 @@ export const getPlayerByIdFromDb = (id: number): Promise<QueryResult> =>
 
 export const getPlayersFromDb = (): Promise<QueryResult> =>
   query(`SELECT * FROM players`, []) as Promise<QueryResult>
-// const players: string[] = []
-// for (let i = 0; i < (await result).rowCount; i++) {
-//   players.push((await result).rows[i])
-// }
-// return players

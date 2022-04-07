@@ -31,13 +31,13 @@ export const deleteFavPlayer = async (
 export const checkDuplicateFav = async (
   id: number,
   userId: number
-): Promise<boolean> => {
+): Promise<boolean | null> => {
   const player: string[] | null = await getPlayerById(id)
   const duplicatePlayer: QueryResult = await checkDuplicateFavFromDb(id, userId)
-
-  if (duplicatePlayer === null) {
-    return false
-  } else if (player['id'] === duplicatePlayer[0].player_id) {
+  if (duplicatePlayer.rowCount === 0) {
+    return null
+  }
+  if (player['id'] === duplicatePlayer.rows[0].player_id) {
     return true
   } else {
     throw new Error('Something went wrong')

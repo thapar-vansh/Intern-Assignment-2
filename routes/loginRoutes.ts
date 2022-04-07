@@ -1,8 +1,8 @@
-import express from 'express'
+import express, { Router } from 'express'
 import { register, login, getPlayers } from '../controllers/indexController'
 import { verifyUser } from '../middleware/auth'
 
-export const router = express.Router()
+export const router: Router = express.Router()
 
 router.post('/register', register)
 

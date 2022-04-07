@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Router } from 'express'
 
 import {
   addFavPlayers,
@@ -7,7 +7,7 @@ import {
 } from '../controllers/userController'
 import { verifyUser } from '../middleware/auth.js'
 
-export const router = express.Router()
+export const router: Router = express.Router()
 
 router.post('/add/fav/players', verifyUser, addFavPlayers)
 

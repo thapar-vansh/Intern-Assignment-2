@@ -23,7 +23,7 @@ export const register = async (
   res: Response
 ): Promise<Response> => {
   const { username, password } = req.body
-  if (!username || !password) {
+  if (!username && !password) {
     return res.status(422).send('Input required')
   }
   try {
@@ -54,7 +54,7 @@ export const register = async (
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
   const { username, password } = req.body
-  if (!username || !password) {
+  if (!username && !password) {
     return res.status(422).send('Input required')
   }
   try {
