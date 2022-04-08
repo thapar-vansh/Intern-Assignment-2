@@ -8,7 +8,7 @@
     "build": "tsc --project ./tsconfig.json",
     "lint": "eslint . --ext .ts",
     "test": "jest -c ./jest.unit.json",
-    "test:coverage":"jest --coverage -c ./jest.unit.json"
+    "test:coverage": "jest --coverage -c ./jest.unit.json"
   },
   "author": "Vansh Thapar",
   "license": "ISC",

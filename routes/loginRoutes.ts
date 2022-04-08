@@ -1,5 +1,5 @@
 import express, { Router } from 'express'
-import { register, login, getPlayers } from '../controllers/indexController'
+import { register, login, getPlayers } from '../controllers/loginController'
 import { verifyUser } from '../middleware/auth'
 
 export const router: Router = express.Router()

@@ -3,7 +3,7 @@ import {
   getAllPlayers,
   registerUser,
   loginUser,
-} from '../services/indexService'
+} from '../services/loginService'
 
 export const getPlayers = async (
   req: Request,
