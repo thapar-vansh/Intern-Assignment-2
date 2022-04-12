@@ -11,7 +11,7 @@ export const getUserbyUsername = (username: string): Promise<QueryResult> =>
 export const addUserToDb = async (
   username: string,
   hashedPassword: string
-): Promise<void> => {
+): Promise<any> => {
   query(
     `INSERT INTO users
     (username, password) VALUES ($1,$2)`,

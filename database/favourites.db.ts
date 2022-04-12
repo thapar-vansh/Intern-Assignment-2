@@ -1,10 +1,10 @@
-import { query } from '../util/server.js'
+import { query } from '../util/server'
 import { QueryResult } from 'pg'
 
 export const addFavPlayerToDb = async (
   userId: number,
   id: number
-): Promise<void> => {
+): Promise<any> => {
   await query(
     `INSERT INTO favourites 
         (user_id, player_id)
@@ -25,7 +25,7 @@ export const getFavPlayersFromDb = (userId: number): Promise<QueryResult> =>
 export const deleteFavPlayerFromDb = async (
   id: number,
   userId: number
-): Promise<void> => {
+): Promise<any> => {
   await query(
     `DELETE FROM favourites
         WHERE player_id  = $1 

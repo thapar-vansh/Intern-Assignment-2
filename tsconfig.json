@@ -3,7 +3,11 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "es6",
-    "types":["node","jest"],
+    "resolveJsonModule": true,
+    "types": [
+      "node",
+      "jest"
+    ],
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist"

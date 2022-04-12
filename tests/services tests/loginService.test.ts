@@ -1,13 +1,16 @@
-import { getAllPlayers } from '../services/loginService'
+import { getAllPlayers } from '../../services/loginService'
 
 describe('Get all players', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+    jest.resetAllMocks()
+  })
+  afterEach(()=>{
+    jest.clearAllMocks()
+    jest.resetAllMocks()
+  })
   test('returns all players', async () => {
-    let responseObject = {}
-    const response = {
-      json: jest.fn().mockImplementation((result) => {
-        responseObject = result
-      }),
-    }
+    const mockGetAllPlayers = jest.fn().mockImplementation(()=>Promise.resolve(getAllPlayers()))
 
     const expectedUsers = [
       {
@@ -42,6 +45,6 @@ describe('Get all players', () => {
       },
     ]
 
-    expect(await getAllPlayers()).toEqual(expectedUsers)
+    expect(await mockGetAllPlayers()).toEqual(expectedUsers)
   })
 })

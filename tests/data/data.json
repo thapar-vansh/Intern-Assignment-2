@@ -1,0 +1,23 @@
+{
+  "insertSuccess": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [],
+    "command": "INSERT",
+    "fields": []
+  },
+  "deleteSuccess": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [],
+    "command": "DELETE",
+    "fields": []
+  },
+  "updateSuccess": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [],
+    "command": "UPDATE",
+    "fields": []
+  }
+}

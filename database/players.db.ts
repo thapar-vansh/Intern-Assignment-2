@@ -4,7 +4,7 @@ import { query } from '../util/server'
 export const addPlayerToDb = async (
   name: string,
   country: string
-): Promise<void> => {
+): Promise<any> => {
   await query(
     `INSERT INTO players
     (name,country)
@@ -17,7 +17,7 @@ export const updatePlayerToDb = async (
   id: number,
   name: string,
   country: string
-): Promise<void> => {
+): Promise<any> => {
   await query(
     `UPDATE players
         SET name = $2, country = $3
@@ -26,7 +26,7 @@ export const updatePlayerToDb = async (
   )
 }
 
-export const deletePlayerFromDb = async (id: number): Promise<void> => {
+export const deletePlayerFromDb = async (id: number): Promise<any> => {
   await query(
     `DELETE FROM players
         WHERE id = $1`,
