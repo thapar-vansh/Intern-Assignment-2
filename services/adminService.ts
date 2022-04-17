@@ -5,26 +5,25 @@ import {
   deletePlayerFromDb,
   getPlayerByNameFromDb,
   getPlayerByIdFromDb,
-} from '../database/players.db.js'
+} from '../database/players.db'
 
-export const addPlayer = async (
+export const addPlayer = (
   name: string,
   country: string
-): Promise<void> => {
-  await addPlayerToDb(name, country)
-}
+): Promise<QueryResult> => 
+  addPlayerToDb(name, country) as Promise<QueryResult>
 
 export const updatePlayer = async (
   id: number,
   name: string,
   country: string
-): Promise<void> => {
-  await updatePlayerToDb(id, name, country)
-}
+): Promise<QueryResult> => 
+  await updatePlayerToDb(id, name, country) as QueryResult
 
-export const deletePlayer = async (id: number): Promise<void> => {
-  await deletePlayerFromDb(id)
-}
+
+export const deletePlayer = async (id: number): Promise<QueryResult> => 
+  await deletePlayerFromDb(id) as QueryResult
+
 
 export const getPlayerByName = async (
   name: string

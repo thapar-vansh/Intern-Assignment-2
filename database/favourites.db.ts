@@ -1,17 +1,16 @@
 import { query } from '../util/server'
 import { QueryResult } from 'pg'
 
-export const addFavPlayerToDb = async (
+export const addFavPlayerToDb = (
   userId: number,
   id: number
-): Promise<any> => {
-  await query(
+): Promise<QueryResult> =>
+  query(
     `INSERT INTO favourites 
         (user_id, player_id)
         VALUES ($1,$2)`,
     [userId, id]
-  )
-}
+  ) as Promise<QueryResult>
 
 export const getFavPlayersFromDb = (userId: number): Promise<QueryResult> =>
   query(
@@ -25,14 +24,13 @@ export const getFavPlayersFromDb = (userId: number): Promise<QueryResult> =>
 export const deleteFavPlayerFromDb = async (
   id: number,
   userId: number
-): Promise<any> => {
-  await query(
+): Promise<QueryResult> =>
+  (await query(
     `DELETE FROM favourites
         WHERE player_id  = $1 
         AND user_id = $2`,
     [id, userId]
-  )
-}
+  )) as QueryResult
 
 export const checkDuplicateFavFromDb = (
   id: number,

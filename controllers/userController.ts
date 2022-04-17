@@ -6,7 +6,7 @@ import {
   getFavPlayer,
   deleteFavPlayer,
   checkDuplicateFav,
-} from '../services/userService.js'
+} from '../services/userService'
 
 export const addFavPlayers = async (
   req: Request,

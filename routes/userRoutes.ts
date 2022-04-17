@@ -5,7 +5,7 @@ import {
   getFavPlayers,
   deleteFavPlayers,
 } from '../controllers/userController'
-import { verifyUser } from '../middleware/auth.js'
+import { verifyUser } from '../middleware/auth'
 
 export const router: Router = express.Router()
 

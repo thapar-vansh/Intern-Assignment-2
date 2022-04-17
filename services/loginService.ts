@@ -39,7 +39,7 @@ export const loginUser = async (
   }
 }
 
-function generateToken(userId: number): string {
+export function generateToken(userId: number): string {
   const privateKey: string = process.env.JWT_PRIVATEKEY
   const token: string = jwt.sign(
     { userId: userId, iat: Math.round(new Date().getTime() / 1000) },

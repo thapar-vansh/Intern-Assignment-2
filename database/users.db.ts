@@ -11,13 +11,12 @@ export const getUserbyUsername = (username: string): Promise<QueryResult> =>
 export const addUserToDb = async (
   username: string,
   hashedPassword: string
-): Promise<any> => {
+): Promise<QueryResult> =>
   query(
     `INSERT INTO users
     (username, password) VALUES ($1,$2)`,
     [username, hashedPassword]
-  )
-}
+  ) as Promise<QueryResult>
 
 export const getUserByUserId = async (userId: number): Promise<QueryResult> => {
   const userDetails = (await query(

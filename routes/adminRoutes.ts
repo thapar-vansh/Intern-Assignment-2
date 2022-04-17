@@ -5,7 +5,7 @@ import {
   updatePlayers,
   deletePlayers,
 } from '../controllers/adminController'
-import { verifyAdmin } from '../middleware/auth.js'
+import { verifyAdmin } from '../middleware/auth'
 
 export const router: Router = express.Router()
 

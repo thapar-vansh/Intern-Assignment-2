@@ -1,18 +1,16 @@
-import { getPlayerById } from './adminService.js'
+import { getPlayerById } from './adminService'
 import {
   addFavPlayerToDb,
   getFavPlayersFromDb,
   deleteFavPlayerFromDb,
   checkDuplicateFavFromDb,
-} from '../database/favourites.db.js'
+} from '../database/favourites.db'
 import { QueryResult } from 'pg'
 
 export const addFavPlayer = async (
   userId: number,
   id: number
-): Promise<void> => {
-  await addFavPlayerToDb(userId, id)
-}
+): Promise<QueryResult> => addFavPlayerToDb(userId, id) as Promise<QueryResult>
 
 export const getFavPlayer = async (
   userId: number
@@ -24,9 +22,8 @@ export const getFavPlayer = async (
 export const deleteFavPlayer = async (
   id: number,
   userId: number
-): Promise<void> => {
-  await deleteFavPlayerFromDb(id, userId)
-}
+): Promise<QueryResult> =>
+  deleteFavPlayerFromDb(id, userId) as Promise<QueryResult>
 
 export const checkDuplicateFav = async (
   id: number,
@@ -34,10 +31,9 @@ export const checkDuplicateFav = async (
 ): Promise<boolean | null> => {
   const player: string[] | null = await getPlayerById(id)
   const duplicatePlayer: QueryResult = await checkDuplicateFavFromDb(id, userId)
-  if (duplicatePlayer.rowCount === 0) {
+  if (duplicatePlayer.rowCount < 1) {
     return null
-  }
-  if (player['id'] === duplicatePlayer.rows[0].player_id) {
+  } else if (player['id'] === duplicatePlayer.rows[0].player_id) {
     return true
   } else {
     throw new Error('Something went wrong')

@@ -53,12 +53,8 @@ describe('tests for favourites table queries', () => {
       .fn()
       .mockImplementation(() => Promise.resolve(checkDuplicateFavFromDb(20,1)))
     const result = await mockCheckDuplicateFavFromDb(20)
-    const expectedPlayers = [
-      {
-        name: 'virat',
-        country: 'india',
-      },
-    ]
+    
+    const expectedPlayers = []
     expect(mockCheckDuplicateFavFromDb).toBeCalledTimes(1)
     expect(result.rows).toEqual(expectedPlayers)
   })
