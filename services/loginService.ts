@@ -12,7 +12,7 @@ export const getAllPlayers = async (): Promise<string[]> => {
 export const registerUser = async (
   username: string,
   password: string
-): Promise<boolean> => {
+): Promise<boolean | QueryResult> => {
   const hashedPassword: string = await bcrypt.hash(password, 10)
   const user: QueryResult = await getUserbyUsername(username)
   if (user.rowCount > 0) {
@@ -29,7 +29,7 @@ export const loginUser = async (
   if (loginResult.rowCount > 0) {
     if (await bcrypt.compare(password, loginResult.rows[0].password)) {
       const userId: number = loginResult.rows[0].id
-      const token: string = generateToken(userId)
+      const token: Promise<string> = generateToken(userId)
       return token
     } else {
       throw new Error('Invalid credentials')
@@ -39,7 +39,7 @@ export const loginUser = async (
   }
 }
 
-export function generateToken(userId: number): string {
+export const generateToken = async (userId: number): Promise<string> => {
   const privateKey: string = process.env.JWT_PRIVATEKEY
   const token: string = jwt.sign(
     { userId: userId, iat: Math.round(new Date().getTime() / 1000) },

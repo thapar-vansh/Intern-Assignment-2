@@ -9,16 +9,11 @@ import {
 import * as player from '../../database/players.db'
 import * as data from '../data/data.json'
 
-
 describe('tests for players table queries', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    jest.resetAllMocks()
   })
-  afterEach(() => {
-    jest.clearAllMocks()
-    jest.resetAllMocks()
-  })
+
   it('adds player to database', async () => {
     const mockAddPlayerToDb = jest
       .spyOn(player, 'addPlayerToDb')
@@ -48,60 +43,29 @@ describe('tests for players table queries', () => {
   it('gets player by name', async () => {
     const mockGetPlayerByNameFromDb = jest
       .fn()
-      .mockImplementation(() => Promise.resolve(getPlayerByNameFromDb('msd')))
-    const result = await mockGetPlayerByNameFromDb('msd')
-    const expectedPlayer = [{ id: '9', name: 'msd', country: 'india' }]
+      .mockImplementation(() => Promise.resolve(data.getPlayerByNameSuccess))
+    const result = await getPlayerByNameFromDb('msd')
+    const expectedPlayer = await mockGetPlayerByNameFromDb('msd')
     expect(mockGetPlayerByNameFromDb).toBeCalledTimes(1)
-    expect(result.rows).toEqual(expectedPlayer)
+    expect(result.rows[0]).toEqual(expectedPlayer)
   })
 
   it('gets player by id', async () => {
     const mockGetPlayerByIdFromDb = jest
       .fn()
-      .mockImplementation(() => Promise.resolve(getPlayerByIdFromDb(1)))
-    const result = await mockGetPlayerByIdFromDb(1)
-    const expectedPlayer = [{ id: '1', name: 'virat', country: 'india' }]
+      .mockImplementation(() => Promise.resolve(data.getPlayerByIdSuccess))
+    const result = await getPlayerByIdFromDb(1)
+    const expectedPlayer = await mockGetPlayerByIdFromDb(1)
     expect(mockGetPlayerByIdFromDb).toBeCalledTimes(1)
-    expect(result.rows).toEqual(expectedPlayer)
+    expect(result.rows[0]).toEqual(expectedPlayer)
   })
   it('gets player from db', async () => {
     const mockGetPlayersFromDb = jest
       .fn()
-      .mockImplementation(() => Promise.resolve(getPlayersFromDb()))
-    const result = await mockGetPlayersFromDb()
-    const expectedPlayer = [
-      {
-        id: '1',
-        name: 'virat',
-        country: 'india',
-      },
-      {
-        id: '2',
-        name: 'rohit',
-        country: 'india',
-      },
-      {
-        id: '5',
-        name: 'sachin',
-        country: 'india',
-      },
-      {
-        id: '7',
-        name: 'tendulkar sachin',
-        country: 'india',
-      },
-      {
-        id: '8',
-        name: 'vansh',
-        country: 'india',
-      },
-      {
-        id: '9',
-        name: 'msd',
-        country: 'india',
-      },
-    ]
+      .mockImplementation(() => Promise.resolve(data.getAllPlayersSuccess))
+    const result = await getPlayersFromDb()
+    const expectedResult = await mockGetPlayersFromDb()
     expect(mockGetPlayersFromDb).toBeCalledTimes(1)
-    expect(result.rows).toEqual(expectedPlayer)
+    expect(result.rows).toEqual(expectedResult)
   })
 })
