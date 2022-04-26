@@ -29,37 +29,141 @@
     "name": "virat",
     "country": "india"
   },
-  "getAllPlayersSuccess": [
-    { "country": "india", "id": "1", "name": "virat" },
-    { "country": "india", "id": "2", "name": "rohit" },
-    { "country": "india", "id": "5", "name": "sachin" },
-    { "country": "india", "id": "7", "name": "tendulkar sachin" },
-    { "country": "india", "id": "8", "name": "vansh" },
-    { "country": "india", "id": "9", "name": "msd" }
-  ],
+  "getAllPlayersSuccessFromDb": 
+    {
+      "oid": 0,
+      "rowCount": 6,
+      "rows": [
+        { "country": "india", "id": "1", "name": "virat" },
+        { "country": "india", "id": "2", "name": "rohit" },
+        { "country": "india", "id": "5", "name": "sachin" },
+        { "country": "india", "id": "7", "name": "tendulkar sachin" },
+        { "country": "india", "id": "8", "name": "vansh" },
+        { "country": "india", "id": "9", "name": "msd" }
+      ],
+      "command": "SELECT",
+      "fields": []
+    }
+  ,
   "getFavPlayersSuccess": [
     {
       "name": "virat",
       "country": "india"
     }
   ],
-  "getFavFromDbSuccess": [
+  "getFavPlayerSuccessFromDb": [
     {
-      "name": "virat",
-      "country": "india"
+      "oid": 0,
+      "rowCount": 1,
+      "rows": [{ "id": "1", "name": "virat", "country": "india" }],
+      "command": "SELECT",
+      "fields": []
     }
   ],
-  "checkDuplicateFavSuccess": [{ "player_id": "1" }],
-  "getUserByUsernameSuccess": [
+  "checkDuplicateFavSuccessFromDb": 
     {
-      "id": "1",
-      "username": "vansh",
-      "password": "$2b$10$I1S0OevKbwCRhxYG9MxRCeuFyInUX29BmzfAInvQeMU2XTbrg/K6."
+      "oid": 0,
+      "rowCount": 1,
+      "rows": [{ "player_id": "1" }],
+      "command": "SELECT",
+      "fields": []
+    },
+    "checkDuplicateFavFailFromDb": 
+    {
+      "oid": 0,
+      "rowCount": 0,
+      "rows": [],
+      "command": "SELECT",
+      "fields": []
+    },
+
+  "getUserByUsernameSuccess": 
+    {
+      "oid": 0,
+      "rowCount": 1,
+      "rows": [
+        {
+          "id": "1",
+          "username": "vansh",
+          "password": "$2b$10$I1S0OevKbwCRhxYG9MxRCeuFyInUX29BmzfAInvQeMU2XTbrg/K6."
+        }
+      ],
+      "command": "SELECT",
+      "fields": []
+    }
+  ,
+
+  "getUserByUserIdFromDbSuccess": [
+    {
+      "oid": 0,
+      "rowCount": 1,
+      "rows": [
+        {
+          "id": "1",
+          "username": "vansh",
+          "password": "$2b$10$I1S0OevKbwCRhxYG9MxRCeuFyInUX29BmzfAInvQeMU2XTbrg/K6."
+        }
+      ],
+      "command": "SELECT",
+      "fields": []
     }
   ],
-  "getUserByUserIdSuccess": {
-    "id": "1",
-    "password": "$2b$10$I1S0OevKbwCRhxYG9MxRCeuFyInUX29BmzfAInvQeMU2XTbrg/K6.",
-    "username": "vansh"
-  }
+  "getPlayerByNameSuccessFromDb": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [{ "id": "9", "name": "msd", "country": "india" }],
+    "command": "SELECT",
+    "fields": []
+  },
+  "getPlayerByNameFailFromDb": {
+    "oid": 0,
+    "rowCount": 0,
+    "rows": [],
+    "command": "SELECT",
+    "fields": []
+  },
+  "getFavPlayerByNameFailFromDb": {
+    "oid": 0,
+    "rowCount": 0,
+    "rows": [],
+    "command": "SELECT",
+    "fields": []
+  },
+  "getFavPlayerByNameSuccessFromDb": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [{ "id": "1", "name": "virat", "country": "india" }],
+    "command": "SELECT",
+    "fields": []
+  },
+  "getPlayerByIdSuccessFromDb": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [{ "id": "1", "name": "virat", "country": "india" }],
+    "command": "SELECT",
+    "fields": []
+  },
+  "getPlayerByIdFailFromDb": {
+    "oid": 0,
+    "rowCount": 0,
+    "rows": [],
+    "command": "SELECT",
+    "fields": []
+  },
+  "getAllPlayersSuccess": 
+    {
+      "oid": 0,
+      "rowCount": 1,
+      "rows": [
+        { "country": "india", "id": "1", "name": "virat" },
+        { "country": "india", "id": "2", "name": "rohit" },
+        { "country": "india", "id": "5", "name": "sachin" },
+        { "country": "india", "id": "7", "name": "tendulkar sachin" },
+        { "country": "india", "id": "8", "name": "vansh" },
+        { "country": "india", "id": "9", "name": "msd" }
+      ],
+      "command": "SELECT",
+      "fields": []
+    }
 }
+

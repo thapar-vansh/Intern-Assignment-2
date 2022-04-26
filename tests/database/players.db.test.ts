@@ -6,66 +6,80 @@ import {
   addPlayerToDb,
   deletePlayerFromDb,
 } from '../../database/players.db'
-import * as player from '../../database/players.db'
-import * as data from '../data/data.json'
 
+import * as data from '../data/data.json'
+import * as server from '../../util/server'
 describe('tests for players table queries', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
 
   it('adds player to database', async () => {
-    const mockAddPlayerToDb = jest
-      .spyOn(player, 'addPlayerToDb')
-      .mockImplementation(() => Promise.resolve(data.insertSuccess))
-    const result = await addPlayerToDb('vansh', 'india')
-    expect(mockAddPlayerToDb).toHaveBeenCalledTimes(1)
-    expect(result).toEqual(data.insertSuccess)
+    const mockDbQuery = jest
+      .spyOn(server, 'query')
+      .mockResolvedValueOnce(data.insertSuccess)
+    const result = addPlayerToDb('rohan', 'india')
+    expect(await result).toBe(data.insertSuccess)
+    expect(mockDbQuery).toBeCalledTimes(1)
   })
   it('updates player to database', async () => {
-    const mockUpdatePlayerToDb = jest
-      .spyOn(player, 'updatePlayerToDb')
-      .mockImplementation(() => Promise.resolve(data.updateSuccess))
-    const result = await updatePlayerToDb(1, 'vansh', 'india')
-    expect(mockUpdatePlayerToDb).toHaveBeenCalledTimes(1)
-    expect(result).toEqual(data.updateSuccess)
+    const mockDbQuery = jest
+      .spyOn(server, 'query')
+      .mockResolvedValueOnce(data.updateSuccess)
+    const result = updatePlayerToDb(1, 'rohan', 'india')
+    expect(await result).toBe(data.updateSuccess)
+    expect(mockDbQuery).toBeCalledTimes(1)
   })
 
   it('deletes player from database', async () => {
-    const mockDeletePlayerToDb = jest
-      .spyOn(player, 'deletePlayerFromDb')
-      .mockImplementation(() => Promise.resolve(data.deleteSuccess))
-    const result = await deletePlayerFromDb(1)
-    expect(mockDeletePlayerToDb).toHaveBeenCalledTimes(1)
-    expect(result).toEqual(data.deleteSuccess)
+    const mockDbQuery = jest
+      .spyOn(server, 'query')
+      .mockResolvedValueOnce(data.deleteSuccess)
+    const result = deletePlayerFromDb(2)
+    expect(await result).toBe(data.deleteSuccess)
+    expect(mockDbQuery).toBeCalledTimes(1)
   })
 
   it('gets player by name', async () => {
-    const mockGetPlayerByNameFromDb = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(data.getPlayerByNameSuccess))
-    const result = await getPlayerByNameFromDb('msd')
-    const expectedPlayer = await mockGetPlayerByNameFromDb('msd')
-    expect(mockGetPlayerByNameFromDb).toBeCalledTimes(1)
-    expect(result.rows[0]).toEqual(expectedPlayer)
+    const mockDbQuery = jest
+      .spyOn(server, 'query')
+      .mockResolvedValueOnce(data.getPlayerByNameSuccessFromDb)
+    const result = getPlayerByNameFromDb('msd')
+    expect(await result).toBe(data.getPlayerByNameSuccessFromDb)
+    expect(mockDbQuery).toBeCalledTimes(1)
+  })
+
+  it('gets player by name fails when player does not exists', async () => {
+    const mockDbQuery = jest
+      .spyOn(server, 'query')
+      .mockResolvedValueOnce(data.getFavPlayerByNameFailFromDb)
+    const result = getPlayerByNameFromDb('kaju')
+    expect(await result).toStrictEqual(data.getPlayerByNameFailFromDb)
+    expect(mockDbQuery).toBeCalledTimes(1)
+  })
+  it('gets player by id', async () => {
+    const mockDbQuery = jest
+      .spyOn(server, 'query')
+      .mockResolvedValueOnce(data.getPlayerByIdSuccessFromDb)
+    const result = getPlayerByIdFromDb(1)
+    expect(await result).toBe(data.getPlayerByIdSuccessFromDb)
+    expect(mockDbQuery).toBeCalledTimes(1)
   })
 
   it('gets player by id', async () => {
-    const mockGetPlayerByIdFromDb = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(data.getPlayerByIdSuccess))
-    const result = await getPlayerByIdFromDb(1)
-    const expectedPlayer = await mockGetPlayerByIdFromDb(1)
-    expect(mockGetPlayerByIdFromDb).toBeCalledTimes(1)
-    expect(result.rows[0]).toEqual(expectedPlayer)
+    const mockDbQuery = jest
+      .spyOn(server, 'query')
+      .mockResolvedValueOnce(data.getPlayerByIdFailFromDb)
+    const result = getPlayerByIdFromDb(88)
+    expect(await result).toBe(data.getPlayerByIdFailFromDb)
+    expect(mockDbQuery).toBeCalledTimes(1)
   })
   it('gets player from db', async () => {
-    const mockGetPlayersFromDb = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(data.getAllPlayersSuccess))
-    const result = await getPlayersFromDb()
-    const expectedResult = await mockGetPlayersFromDb()
-    expect(mockGetPlayersFromDb).toBeCalledTimes(1)
-    expect(result.rows).toEqual(expectedResult)
+    const mockDbQuery = jest
+      .spyOn(server, 'query')
+      .mockResolvedValueOnce(data.getAllPlayersSuccessFromDb)
+    const result = getPlayersFromDb()
+    expect(await result).toBe(data.getAllPlayersSuccessFromDb)
+    expect(mockDbQuery).toBeCalledTimes(1)
   })
 })

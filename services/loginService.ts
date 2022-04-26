@@ -5,7 +5,7 @@ import { getPlayersFromDb } from '../database/players.db'
 import { getUserbyUsername, addUserToDb } from '../database/users.db'
 
 export const getAllPlayers = async (): Promise<string[]> => {
-  const players: QueryResult = await getPlayersFromDb()
+  const players:QueryResult = await getPlayersFromDb()
   return players.rows
 }
 

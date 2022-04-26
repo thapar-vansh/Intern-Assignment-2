@@ -18,14 +18,9 @@ export const addUserToDb = async (
     [username, hashedPassword]
   ) as Promise<QueryResult>
 
-export const getUserByUserId = async (userId: number): Promise<QueryResult> => {
-  const userDetails = (await query(
+export const getUserByUserIdFromDb = (userId: number): Promise<QueryResult> =>
+  query(
     `SELECT * FROM users
       WHERE id = $1`,
     [userId]
-  )) as Promise<QueryResult>
-  if ((await userDetails).rows[0]) {
-    return (await userDetails).rows[0]
-  }
-  return null
-}
+  ) as Promise<QueryResult>

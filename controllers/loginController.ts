@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { Query, QueryResult } from 'pg'
 import {
   getAllPlayers,
   registerUser,
@@ -31,7 +32,7 @@ export const register = async (
       '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
     )
     if (strongRegex.test(password)) {
-      const result: boolean = await registerUser(username, password)
+      const result: boolean | QueryResult = await registerUser(username, password)
       if (result === true) {
         return res.status(409).send('User already exists.Please login')
       }

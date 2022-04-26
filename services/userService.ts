@@ -6,7 +6,8 @@ import {
   checkDuplicateFavFromDb,
 } from '../database/favourites.db'
 import { QueryResult } from 'pg'
-
+import { getUserByUserIdFromDb } from '../database/users.db'
+ 
 export const addFavPlayer = async (
   userId: number,
   id: number
@@ -15,7 +16,7 @@ export const addFavPlayer = async (
 export const getFavPlayer = async (
   userId: number
 ): Promise<string[] | null> => {
-  const favPlayers: QueryResult = await getFavPlayersFromDb(userId)
+  const favPlayers: QueryResult = await getFavPlayersFromDb(userId) 
   return favPlayers.rowCount > 0 ? favPlayers.rows : null
 }
 
@@ -38,4 +39,9 @@ export const checkDuplicateFav = async (
   } else {
     throw new Error('Something went wrong')
   }
+}
+
+export const getUserByUserId = async (userId: number) :Promise<string[] | null>=> {
+  const user = await getUserByUserIdFromDb(userId)
+  return user.rowCount > 0 ? user.rows : null
 }

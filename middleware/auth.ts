@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
-import { getUserByUserId } from '../database/users.db'
+import { getUserByUserId } from '../services/userService'
 import { QueryResult } from 'pg'
 const config = process.env
 
@@ -19,7 +19,7 @@ export const verifyUser = async (
       config.JWT_PRIVATEKEY
     )
     req.userToken = decoded as (string | number)[]
-    const user: QueryResult = await getUserByUserId(req.userToken['userId'])
+    const user: string[]|null = await getUserByUserId(req.userToken['userId'])
     if (user === null) {
       return res.status(403).send('User not in database. Please register')
     }
