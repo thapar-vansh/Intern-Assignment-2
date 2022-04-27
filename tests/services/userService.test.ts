@@ -5,6 +5,7 @@ import {
   checkDuplicateFav,
 } from '../../services/UserService'
 import * as user from '../../services/UserService'
+import * as userDb from '../../database/users.db'
 import * as favourite from '../../database/favourites.db'
 import * as data from '../data/data.json'
 
@@ -42,7 +43,7 @@ describe('Tests for admin service', () => {
   it('service to delete favourite player from database', async () => {
     const mockDeleteFavPlayer = jest
       .spyOn(user, 'deleteFavPlayer')
-      .mockImplementation(() => Promise.resolve(data.deleteSuccess))
+      .mockResolvedValue(Promise.resolve(data.deleteSuccess))
     const result = await deleteFavPlayer(20, 1)
     expect(mockDeleteFavPlayer).toBeCalledTimes(1)
     expect(result).toEqual(data.deleteSuccess)
@@ -64,5 +65,22 @@ describe('Tests for admin service', () => {
     const result = checkDuplicateFav(20, 1)
     expect(await result).toBe(null)
     expect(mockCheckDuplicateFav).toBeCalledTimes(1)
+  })
+
+  it('service to get user by user id', async () => {
+    const mockGetUserByUserId = jest
+      .spyOn(userDb, 'getUserByUserIdFromDb')
+      .mockResolvedValue(data.getUserByUserIdFromDbSuccess)
+    const result = await user.getUserByUserId(20)
+    expect(mockGetUserByUserId).toBeCalledTimes(1)
+    expect(result).toEqual(data.getUserByUserIdFromDbSuccess.rows)
+  })
+  it('service to get user by user id returns null if id not in db', async () => {
+    const mockGetUserByUserId = jest
+      .spyOn(userDb, 'getUserByUserIdFromDb')
+      .mockResolvedValue(data.getUserByUserIdFromDbFailure)
+    const result = await user.getUserByUserId(200)
+    expect(mockGetUserByUserId).toBeCalledTimes(1)
+    expect(result).toEqual(null)
   })
 })

@@ -52,7 +52,7 @@ describe('Tests for admin service', () => {
     const mockGetPlayerByNameFromDb = jest
       .spyOn(playerDb, 'getPlayerByNameFromDb')
       .mockResolvedValue(data.getPlayerByNameFailFromDb)
-    const result = getPlayerByName('msd')
+    const result = getPlayerByName('miller')
     expect(mockGetPlayerByNameFromDb).toBeCalledTimes(1)
     expect(await result).toBe(null)
   })
@@ -69,7 +69,7 @@ describe('Tests for admin service', () => {
     const mockGetPlayerByIdFromDb = jest
       .spyOn(playerDb, 'getPlayerByIdFromDb')
       .mockResolvedValue(data.getPlayerByIdFailFromDb)
-    const result = getPlayerById(1)
+    const result = getPlayerById(99)
     expect(mockGetPlayerByIdFromDb).toBeCalledTimes(1)
     expect(await result).toBe(null)
   })

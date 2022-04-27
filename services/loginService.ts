@@ -5,7 +5,7 @@ import { getPlayersFromDb } from '../database/players.db'
 import { getUserbyUsername, addUserToDb } from '../database/users.db'
 
 export const getAllPlayers = async (): Promise<string[]> => {
-  const players:QueryResult = await getPlayersFromDb()
+  const players: QueryResult = await getPlayersFromDb()
   return players.rows
 }
 
@@ -18,7 +18,7 @@ export const registerUser = async (
   if (user.rowCount > 0) {
     return true
   }
-  addUserToDb(username, hashedPassword)
+  await addUserToDb(username, hashedPassword)
 }
 
 export const loginUser = async (

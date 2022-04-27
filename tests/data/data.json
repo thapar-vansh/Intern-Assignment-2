@@ -1,5 +1,12 @@
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyMCIsImlhdCI6MTY1MDU0OTQ3MiwiZXhwIjoxNjgyMDg1NDcyfQ.hrpDh71e_AX0Ce3kj26CKsmooxqjjWxJkgY3adSNlnY",
+  "registerUserInsertSuccess": {
+    "oid": 0,
+    "rowCount": 0,
+    "rows": [],
+    "command": "INSERT",
+    "fields": []
+  },
   "insertSuccess": {
     "oid": 0,
     "rowCount": 1,
@@ -29,22 +36,20 @@
     "name": "virat",
     "country": "india"
   },
-  "getAllPlayersSuccessFromDb": 
-    {
-      "oid": 0,
-      "rowCount": 6,
-      "rows": [
-        { "country": "india", "id": "1", "name": "virat" },
-        { "country": "india", "id": "2", "name": "rohit" },
-        { "country": "india", "id": "5", "name": "sachin" },
-        { "country": "india", "id": "7", "name": "tendulkar sachin" },
-        { "country": "india", "id": "8", "name": "vansh" },
-        { "country": "india", "id": "9", "name": "msd" }
-      ],
-      "command": "SELECT",
-      "fields": []
-    }
-  ,
+  "getAllPlayersSuccessFromDb": {
+    "oid": 0,
+    "rowCount": 6,
+    "rows": [
+      { "country": "india", "id": "1", "name": "virat" },
+      { "country": "india", "id": "2", "name": "rohit" },
+      { "country": "india", "id": "5", "name": "sachin" },
+      { "country": "india", "id": "7", "name": "tendulkar sachin" },
+      { "country": "india", "id": "8", "name": "vansh" },
+      { "country": "india", "id": "9", "name": "msd" }
+    ],
+    "command": "SELECT",
+    "fields": []
+  },
   "getFavPlayersSuccess": [
     {
       "name": "virat",
@@ -60,54 +65,61 @@
       "fields": []
     }
   ],
-  "checkDuplicateFavSuccessFromDb": 
-    {
-      "oid": 0,
-      "rowCount": 1,
-      "rows": [{ "player_id": "1" }],
-      "command": "SELECT",
-      "fields": []
-    },
-    "checkDuplicateFavFailFromDb": 
-    {
-      "oid": 0,
-      "rowCount": 0,
-      "rows": [],
-      "command": "SELECT",
-      "fields": []
-    },
+  "checkDuplicateFavSuccessFromDb": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [{ "player_id": "1" }],
+    "command": "SELECT",
+    "fields": []
+  },
+  "checkDuplicateFavFailFromDb": {
+    "oid": 0,
+    "rowCount": 0,
+    "rows": [],
+    "command": "SELECT",
+    "fields": []
+  },
 
-  "getUserByUsernameSuccess": 
-    {
-      "oid": 0,
-      "rowCount": 1,
-      "rows": [
-        {
-          "id": "1",
-          "username": "vansh",
-          "password": "$2b$10$I1S0OevKbwCRhxYG9MxRCeuFyInUX29BmzfAInvQeMU2XTbrg/K6."
-        }
-      ],
-      "command": "SELECT",
-      "fields": []
-    }
-  ,
-
-  "getUserByUserIdFromDbSuccess": [
-    {
-      "oid": 0,
-      "rowCount": 1,
-      "rows": [
-        {
-          "id": "1",
-          "username": "vansh",
-          "password": "$2b$10$I1S0OevKbwCRhxYG9MxRCeuFyInUX29BmzfAInvQeMU2XTbrg/K6."
-        }
-      ],
-      "command": "SELECT",
-      "fields": []
-    }
-  ],
+  "getUserByUsernameSuccess": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [
+      {
+        "id": "1",
+        "username": "vansh",
+        "password": "$2b$10$I1S0OevKbwCRhxYG9MxRCeuFyInUX29BmzfAInvQeMU2XTbrg/K6."
+      }
+    ],
+    "command": "SELECT",
+    "fields": []
+  },
+  "getUserByUsernameFailure": {
+    "oid": 0,
+    "rowCount": 0,
+    "rows": [],
+    "command": "SELECT",
+    "fields": []
+  },
+  "getUserByUserIdFromDbSuccess": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [
+      {
+        "id": "20",
+        "username": "shwet",
+        "password": "$2b$10$I1S0OevKbwCRhxYG9MxRCeuFyInUX29BmzfAInvQeMU2XTbrg/K6."
+      }
+    ],
+    "command": "SELECT",
+    "fields": []
+  },
+  "getUserByUserIdFromDbFailure": {
+    "oid": 0,
+    "rowCount": 0,
+    "rows": [],
+    "command": "SELECT",
+    "fields": []
+  },
   "getPlayerByNameSuccessFromDb": {
     "oid": 0,
     "rowCount": 1,
@@ -150,20 +162,18 @@
     "command": "SELECT",
     "fields": []
   },
-  "getAllPlayersSuccess": 
-    {
-      "oid": 0,
-      "rowCount": 1,
-      "rows": [
-        { "country": "india", "id": "1", "name": "virat" },
-        { "country": "india", "id": "2", "name": "rohit" },
-        { "country": "india", "id": "5", "name": "sachin" },
-        { "country": "india", "id": "7", "name": "tendulkar sachin" },
-        { "country": "india", "id": "8", "name": "vansh" },
-        { "country": "india", "id": "9", "name": "msd" }
-      ],
-      "command": "SELECT",
-      "fields": []
-    }
+  "getAllPlayersSuccess": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [
+      { "country": "india", "id": "1", "name": "virat" },
+      { "country": "india", "id": "2", "name": "rohit" },
+      { "country": "india", "id": "5", "name": "sachin" },
+      { "country": "india", "id": "7", "name": "tendulkar sachin" },
+      { "country": "india", "id": "8", "name": "vansh" },
+      { "country": "india", "id": "9", "name": "msd" }
+    ],
+    "command": "SELECT",
+    "fields": []
+  }
 }
-
