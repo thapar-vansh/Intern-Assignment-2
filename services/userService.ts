@@ -30,7 +30,7 @@ export const checkDuplicateFav = async (
   id: number,
   userId: number
 ): Promise<boolean | null> => {
-  const player: string[] | null = await getPlayerById(id)
+  const player: QueryResult | null = await getPlayerById(id)
   const duplicatePlayer: QueryResult = await checkDuplicateFavFromDb(id, userId)
   if (duplicatePlayer.rowCount < 1) {
     return null
