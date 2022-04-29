@@ -5,6 +5,7 @@ import {
   checkDuplicateFav,
 } from '../../services/UserService'
 import * as user from '../../services/UserService'
+import * as admin from '../../services/adminService'
 import * as userDb from '../../database/users.db'
 import * as favourite from '../../database/favourites.db'
 import * as data from '../data/data.json'
@@ -23,7 +24,7 @@ describe('Tests for admin service', () => {
     expect(result).toEqual(data.insertSuccess)
   })
 
-  it('service to get favourite player', async () => {
+  it('service to get favourite player success', async () => {
     const mockGetFavPlayer = jest
       .spyOn(favourite, 'getFavPlayersFromDb')
       .mockResolvedValue(data.getFavPlayerByNameSuccessFromDb)
@@ -48,25 +49,48 @@ describe('Tests for admin service', () => {
     expect(mockDeleteFavPlayer).toBeCalledTimes(1)
     expect(result).toEqual(data.deleteSuccess)
   })
-  it('service to check duplicate favourite player returns true if player exists ', async () => {
-    const mockCheckDuplicateFav = jest
-      .spyOn(favourite, 'checkDuplicateFavFromDb')
-      .mockResolvedValueOnce(
-        Promise.resolve(data.checkDuplicateFavSuccessFromDb)
-      )
-    const result = checkDuplicateFav(1, 20)
-    expect(await result).toBe(true)
-    expect(mockCheckDuplicateFav).toBeCalledTimes(1)
+  it('service to check duplicate favourite player returns something went wrong in case of error ', async () => {
+    try {
+      const mockGetPlayerById = jest
+        .spyOn(admin, 'getPlayerById')
+        .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess))
+      const mockCheckDuplicateFav = jest
+        .spyOn(favourite, 'checkDuplicateFavFromDb')
+        .mockResolvedValue(Promise.resolve(data.checkDuplicateFavSuccessFromDb))
+      const result = checkDuplicateFav(1, 20)
+      expect(await result).toBe(true)
+      expect(mockGetPlayerById).toBeCalledTimes(1)
+      expect(mockCheckDuplicateFav).toBeCalledTimes(1)
+    } catch (err) {
+      console.log(err)
+    }
   })
-  it('service to check duplicate favourite player returns null if duplicate does not exist', async () => {
+
+  it('service to check duplicate favourite player returns null if duplicate player does not exits', async () => {
+    const mockGetPlayerById = jest
+      .spyOn(admin, 'getPlayerById')
+      .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess))
     const mockCheckDuplicateFav = jest
       .spyOn(favourite, 'checkDuplicateFavFromDb')
-      .mockResolvedValueOnce(Promise.resolve(data.checkDuplicateFavFailFromDb))
+      .mockResolvedValue(Promise.resolve(data.checkDuplicateFavFailFromDb))
     const result = checkDuplicateFav(20, 1)
     expect(await result).toBe(null)
+    expect(mockGetPlayerById).toBeCalledTimes(1)
     expect(mockCheckDuplicateFav).toBeCalledTimes(1)
   })
 
+  it('service to check duplicate favourite player returns true if duplicate player exits', async () => {
+    const mockGetPlayerById = jest
+      .spyOn(admin, 'getPlayerById')
+      .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess))
+    const mockCheckDuplicateFav = jest
+      .spyOn(favourite, 'checkDuplicateFavFromDb')
+      .mockResolvedValue(Promise.resolve(data.checkDuplicateFavSuccessFromDb))
+    const result = checkDuplicateFav(1, 20)
+    expect(mockGetPlayerById).toBeCalledTimes(1)
+    expect(mockCheckDuplicateFav).toBeCalledTimes(1)
+    expect(await result).toBe(true)
+  })
 
   it('service to get user by user id', async () => {
     const mockGetUserByUserId = jest
@@ -74,6 +98,7 @@ describe('Tests for admin service', () => {
       .mockResolvedValue(data.getUserByUserIdFromDbSuccess)
     const result = await user.getUserByUserId(20)
     expect(mockGetUserByUserId).toBeCalledTimes(1)
+
     expect(result).toEqual(data.getUserByUserIdFromDbSuccess.rows)
   })
   it('service to get user by user id returns null if id not in db', async () => {

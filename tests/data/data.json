@@ -32,10 +32,13 @@
   "getPlayerByNameSuccess": { "id": "9", "name": "msd", "country": "india" },
 
   "getPlayerByIdSuccess": {
-    "id": "1",
-    "name": "virat",
-    "country": "india"
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [{ "country": "india", "id": 1, "name": "virat" }],
+    "command": "SELECT",
+    "fields": []
   },
+
   "getAllPlayersSuccessFromDb": {
     "oid": 0,
     "rowCount": 6,
@@ -68,7 +71,7 @@
   "checkDuplicateFavSuccessFromDb": {
     "oid": 0,
     "rowCount": 1,
-    "rows": [{ "player_id": "1" }],
+    "rows": [{ "player_id": 1 }],
     "command": "SELECT",
     "fields": []
   },
@@ -85,7 +88,7 @@
     "rowCount": 1,
     "rows": [
       {
-        "id": "1",
+        "id": 1,
         "username": "vansh",
         "password": "$2b$10$I1S0OevKbwCRhxYG9MxRCeuFyInUX29BmzfAInvQeMU2XTbrg/K6."
       }
@@ -151,7 +154,7 @@
   "getPlayerByIdSuccessFromDb": {
     "oid": 0,
     "rowCount": 1,
-    "rows": [{ "id": "1", "name": "virat", "country": "india" }],
+    "rows": [{ "id": 1, "name": "virat", "country": "india" }],
     "command": "SELECT",
     "fields": []
   },
