@@ -67,6 +67,7 @@ describe('Tests for admin service', () => {
     expect(mockCheckDuplicateFav).toBeCalledTimes(1)
   })
 
+
   it('service to get user by user id', async () => {
     const mockGetUserByUserId = jest
       .spyOn(userDb, 'getUserByUserIdFromDb')

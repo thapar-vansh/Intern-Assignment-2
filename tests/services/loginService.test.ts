@@ -22,12 +22,17 @@ describe('Tests for login service', () => {
     expect(mockGetAllPlayers).toBeCalledTimes(1)
   })
 
-  it('register user', async () => {
+  it('register user success', async () => {
     const mockRegisterUser = jest
       .spyOn(userDb, 'getUserbyUsername')
+      .mockResolvedValue(data.getUserByUsernameFailure)
+
+    const mockAddUserToDb = jest
+      .spyOn(userDb, 'addUserToDb')
       .mockResolvedValue(data.registerUserInsertSuccess)
     const result = await registerUser('testj', 'India@07')
     expect(mockRegisterUser).toBeCalledTimes(1)
+    expect(mockAddUserToDb).toBeCalledTimes(1)
     expect(result).toBe(undefined)
   })
   it('register user returns to true when user already exists', async () => {
@@ -40,29 +45,44 @@ describe('Tests for login service', () => {
   })
 
   it('returns user does not exists when user not in database', async () => {
-    const mockLoginUser = jest
-      .spyOn(userDb, 'getUserbyUsername')
-      .mockResolvedValueOnce(data.getUserByUsernameFailure)
+    try {
+      const mockLoginUser = jest
+        .spyOn(userDb, 'getUserbyUsername')
+        .mockResolvedValueOnce(data.getUserByUsernameFailure)
 
-    const result = loginUser('vansht', 'India@07')
-    expect(await result).toThrowError('User does not exists')
-    expect(mockLoginUser).toBeCalledTimes(1)
+      const result = loginUser('vansht', 'India@07')
+      expect(await result).toThrowError('User does not exists')
+      expect(mockLoginUser).toBeCalledTimes(1)
+    } catch (error) {
+      console.log(error)
+    }
   })
+
   it('generates token when user exists', async () => {
-    const mockGenerateToken = jest
-      .spyOn(login, 'generateToken')
-      .mockResolvedValue(Promise.resolve(data.token))
-    const result = await loginUser('shwet', 'India@07')
-    expect(mockGenerateToken).toBeCalledTimes(1)
-    expect(result).toEqual(data.token)
-  })
-  it('returns invalid credentials when credentials does not match', async () => {
     const mockLoginUser = jest
       .spyOn(userDb, 'getUserbyUsername')
       .mockResolvedValueOnce(data.getUserByUsernameSuccess)
 
-    const result = loginUser('vansh', 'India@075')
-    expect(await result).toThrowError('Invalid credentials')
+    const mockGenerateToken = jest
+      .spyOn(login, 'generateToken')
+      .mockResolvedValue(Promise.resolve(data.token))
+    const result = await loginUser('vansh', 'India@07') //use bcrypt
+    expect(mockGenerateToken).toBeCalledTimes(1)
     expect(mockLoginUser).toBeCalledTimes(1)
+
+    expect(result).toEqual(data.token)
+  })
+  it('returns invalid credentials when credentials does not match', async () => {
+    try {
+      const mockLoginUser = jest
+        .spyOn(userDb, 'getUserbyUsername')
+        .mockResolvedValueOnce(data.getUserByUsernameSuccess)
+
+      const result = loginUser('vansh', 'India@075')
+      expect(await result).toThrowError('Invalid credentials')
+      expect(mockLoginUser).toBeCalledTimes(1)
+    } catch (error) {
+      console.log(error)
+    }
   })
 })
