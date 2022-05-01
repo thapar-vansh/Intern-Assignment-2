@@ -34,7 +34,7 @@ export const checkDuplicateFav = async (
   const duplicatePlayer: QueryResult = await checkDuplicateFavFromDb(id, userId)
   if (duplicatePlayer.rowCount < 1) {
     return null
-  } else if (player['id'] === duplicatePlayer.rows[0].player_id) {
+  } else if (player.rows[0].id === duplicatePlayer.rows[0].player_id) {
     return true
   } else {
     throw new Error('Something went wrong')

@@ -66,7 +66,7 @@ describe('Tests for login service', () => {
     const mockGenerateToken = jest
       .spyOn(login, 'generateToken')
       .mockResolvedValue(Promise.resolve(data.token))
-    const result = await loginUser('vansh', 'India@07') //use bcrypt
+    const result = await loginUser('vansh', 'India@07')
     expect(mockGenerateToken).toBeCalledTimes(1)
     expect(mockLoginUser).toBeCalledTimes(1)
 
@@ -84,5 +84,14 @@ describe('Tests for login service', () => {
     } catch (error) {
       console.log(error)
     }
+  })
+
+  it('generates login token success', async () => {
+    const mockGenerateToken = jest
+      .spyOn(login, 'generateToken')
+      .mockResolvedValue(Promise.resolve(data.token))
+    const result = await login.generateToken(20)
+    expect(mockGenerateToken).toBeCalledTimes(1)
+    expect(result).toEqual(data.token)
   })
 })

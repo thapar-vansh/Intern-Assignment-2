@@ -38,6 +38,13 @@
     "command": "SELECT",
     "fields": []
   },
+  "getPlayerByIdSuccess2": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [{ "id": "1" }],
+    "command": "SELECT",
+    "fields": []
+  },
 
   "getAllPlayersSuccessFromDb": {
     "oid": 0,
