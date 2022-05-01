@@ -7,6 +7,7 @@ import {
   deleteFavPlayer,
   checkDuplicateFav,
 } from '../services/userService'
+import { QueryResult } from 'pg'
 
 export const addFavPlayers = async (
   req: Request,
@@ -20,7 +21,7 @@ export const addFavPlayers = async (
     return res.status(400).send('Enter valid id')
   }
   try {
-    const player: string[] | null = await getPlayerById(id)
+    const player: QueryResult | null = await getPlayerById(id)
     if (player === null) {
       return res.status(404).send('Player not found')
     }

@@ -53,14 +53,12 @@ describe('Tests for admin service', () => {
     try {
       const mockGetPlayerById = jest
         .spyOn(admin, 'getPlayerById')
-        .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess))
+        .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess2))
       const mockCheckDuplicateFav = jest
         .spyOn(favourite, 'checkDuplicateFavFromDb')
-        .mockResolvedValue(
-          Promise.resolve(data.checkDuplicateFavSuccessFromDb)
-        )
+        .mockResolvedValue(Promise.resolve(data.checkDuplicateFavSuccessFromDb))
       const result = checkDuplicateFav(1, 20)
-      expect(await result).toBe(true)
+      expect(await result).toThrow('Something went wrong')
       expect(mockGetPlayerById).toBeCalledTimes(1)
       expect(mockCheckDuplicateFav).toBeCalledTimes(1)
     } catch (err) {
@@ -70,8 +68,8 @@ describe('Tests for admin service', () => {
 
   it('service to check duplicate favourite player returns null if duplicate player does not exits', async () => {
     const mockGetPlayerById = jest
-        .spyOn(admin, 'getPlayerById')
-        .mockResolvedValue(Promise. resolve(data.getPlayerByIdSuccess))
+      .spyOn(admin, 'getPlayerById')
+      .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess))
     const mockCheckDuplicateFav = jest
       .spyOn(favourite, 'checkDuplicateFavFromDb')
       .mockResolvedValue(Promise.resolve(data.checkDuplicateFavFailFromDb))
@@ -83,18 +81,17 @@ describe('Tests for admin service', () => {
 
   it('service to check duplicate favourite player returns true if duplicate player exits', async () => {
     const mockGetPlayerById = jest
-        .spyOn(admin, 'getPlayerById')
-        .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess))
-        
+      .spyOn(admin, 'getPlayerById')
+      .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess))
+
     const mockCheckDuplicateFav = jest
       .spyOn(favourite, 'checkDuplicateFavFromDb')
       .mockResolvedValue(Promise.resolve(data.checkDuplicateFavSuccessFromDb))
 
-    const result = await checkDuplicateFav(1, 20)
+    const result = checkDuplicateFav(1, 20)
     expect(mockGetPlayerById).toBeCalledTimes(1)
     expect(mockCheckDuplicateFav).toBeCalledTimes(0)
-    expect(result).toBe(true)
-  
+    expect(await result).toBe(true)
   })
 
   it('service to get user by user id', async () => {
