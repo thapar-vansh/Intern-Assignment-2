@@ -53,12 +53,12 @@ describe('Tests for admin service', () => {
     try {
       const mockGetPlayerById = jest
         .spyOn(admin, 'getPlayerById')
-        .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess))
+        .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess2))
       const mockCheckDuplicateFav = jest
         .spyOn(favourite, 'checkDuplicateFavFromDb')
         .mockResolvedValue(Promise.resolve(data.checkDuplicateFavSuccessFromDb))
       const result = checkDuplicateFav(1, 20)
-      expect(await result).toBe(true)
+      expect(await result).toThrow('Something went wrong')
       expect(mockGetPlayerById).toBeCalledTimes(1)
       expect(mockCheckDuplicateFav).toBeCalledTimes(1)
     } catch (err) {
@@ -83,12 +83,14 @@ describe('Tests for admin service', () => {
     const mockGetPlayerById = jest
       .spyOn(admin, 'getPlayerById')
       .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccess))
+
     const mockCheckDuplicateFav = jest
       .spyOn(favourite, 'checkDuplicateFavFromDb')
       .mockResolvedValue(Promise.resolve(data.checkDuplicateFavSuccessFromDb))
+
     const result = checkDuplicateFav(1, 20)
     expect(mockGetPlayerById).toBeCalledTimes(1)
-    expect(mockCheckDuplicateFav).toBeCalledTimes(1)
+    expect(mockCheckDuplicateFav).toBeCalledTimes(0)
     expect(await result).toBe(true)
   })
 
