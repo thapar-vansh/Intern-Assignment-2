@@ -1,7 +1,6 @@
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 import { getUserByUserId } from '../services/userService'
-import { QueryResult } from 'pg'
 const config = process.env
 
 export const verifyUser = async (
