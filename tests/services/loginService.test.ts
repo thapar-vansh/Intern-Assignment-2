@@ -1,3 +1,4 @@
+
 import {
   getAllPlayers,
   registerUser,
@@ -58,7 +59,7 @@ describe('Tests for login service', () => {
     }
   })
 
-  it('generates token when user exists', async () => {
+  it('loginuser service generates login token when user exists', async () => {
     const mockLoginUser = jest
       .spyOn(userDb, 'getUserbyUsername')
       .mockResolvedValueOnce(data.getUserByUsernameSuccess)
@@ -66,7 +67,7 @@ describe('Tests for login service', () => {
     const mockGenerateToken = jest
       .spyOn(login, 'generateToken')
       .mockResolvedValue(Promise.resolve(data.token))
-    const result = await loginUser('vansh', 'India@07') //use bcrypt
+    const result = await loginUser('shwet', 'India@07')
     expect(mockGenerateToken).toBeCalledTimes(1)
     expect(mockLoginUser).toBeCalledTimes(1)
 
@@ -84,5 +85,14 @@ describe('Tests for login service', () => {
     } catch (error) {
       console.log(error)
     }
+  })
+
+  it('generates login token success', async () => {
+    const mockGenerateToken = jest
+      .spyOn(login, 'generateToken')
+      .mockResolvedValue(Promise.resolve(data.token))
+    const result = await login.generateToken(20)
+    expect(mockGenerateToken).toBeCalledTimes(1)
+    expect(result).toEqual(data.token)
   })
 })

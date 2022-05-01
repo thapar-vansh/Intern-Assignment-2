@@ -1,5 +1,5 @@
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyMCIsImlhdCI6MTY1MDU0OTQ3MiwiZXhwIjoxNjgyMDg1NDcyfQ.hrpDh71e_AX0Ce3kj26CKsmooxqjjWxJkgY3adSNlnY",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwLCJpYXQiOjE2NTExNDg1NDEsImV4cCI6MTY4MjY4NDU0MX0.4_kJdFezrDjl_jSoEphrvVzlaWaCKVCnwrklpTlcjKs",
   "registerUserInsertSuccess": {
     "oid": 0,
     "rowCount": 0,
@@ -38,7 +38,13 @@
     "command": "SELECT",
     "fields": []
   },
-
+  "getPlayerByIdSuccess2": {
+    "oid": 0,
+    "rowCount": 1,
+    "rows": [{ "id": "1" }],
+    "command": "SELECT",
+    "fields": []
+  },
   "getAllPlayersSuccessFromDb": {
     "oid": 0,
     "rowCount": 6,
@@ -88,9 +94,9 @@
     "rowCount": 1,
     "rows": [
       {
-        "id": 1,
-        "username": "vansh",
-        "password": "$2b$10$I1S0OevKbwCRhxYG9MxRCeuFyInUX29BmzfAInvQeMU2XTbrg/K6."
+        "id": "20",
+        "username": "shwet",
+        "password": "$2b$10$1Tn3O6xJpv5dkWf/K.bJV.5wSPQRcUWU9VPcALTWtNyxqsySBEWeC"
       }
     ],
     "command": "SELECT",
@@ -154,7 +160,7 @@
   "getPlayerByIdSuccessFromDb": {
     "oid": 0,
     "rowCount": 1,
-    "rows": [{ "id": 1, "name": "virat", "country": "india" }],
+    "rows": [{ "id": "1", "name": "virat", "country": "india" }],
     "command": "SELECT",
     "fields": []
   },
