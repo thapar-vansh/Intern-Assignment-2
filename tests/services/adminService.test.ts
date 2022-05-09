@@ -63,7 +63,7 @@ describe('Tests for admin service', () => {
       .mockResolvedValue(Promise.resolve(data.getPlayerByIdSuccessFromDb))
     const result = await getPlayerById(1)
     expect(mockGetPlayerById).toBeCalledTimes(1)
-    expect(result).toEqual(data.getPlayerByIdSuccessFromDb.rows[0])
+    expect(result).toEqual(data.getPlayerByIdSuccessFromDb)
   })
   it('get player by id returns null when id does not exists', async () => {
     const mockGetPlayerByIdFromDb = jest

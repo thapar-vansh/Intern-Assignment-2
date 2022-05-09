@@ -29,7 +29,7 @@ export const getPlayerByName = async (
   return playerByName.rowCount > 0 ? playerByName.rows[0] : null
 }
 
-export const getPlayerById = async (id: number): Promise<QueryResult> | null => {
+export const getPlayerById = async (id: number): Promise<QueryResult | null> => {
   const playerById: QueryResult = await getPlayerByIdFromDb(id) 
-  return playerById.rowCount > 0 ? playerById.rows[0] : null
+  return playerById.rowCount > 0 ? playerById : null
 }
