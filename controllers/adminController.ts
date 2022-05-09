@@ -40,7 +40,7 @@ export const updatePlayers = async (
     return res.status(400).send('Enter valid id')
   }
   try {
-    const player: QueryResult | null = await getPlayerById(id)
+    const player: QueryResult | Promise<null> = await getPlayerById(id)
     if (player === null) {
       return res.status(404).send('Player not found')
     }
@@ -61,7 +61,7 @@ export const deletePlayers = async (
     return res.status(422).send('Input required')
   }
   try {
-    const player: QueryResult | null = await getPlayerById(id)
+    const player: QueryResult | Promise<null> = await getPlayerById(id)
     if (player === null) {
       return res.status(404).send('No player found to delete')
     }
