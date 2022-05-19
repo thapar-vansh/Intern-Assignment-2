@@ -4,8 +4,6 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "json:server": "json-server --watch json-server/db.json" ,
-    "json:server:remote": "json-server http://jsonplaceholder.typicode.com/db",
     "start": "nodemon ./dist/src/index.js",
     "build": "tsc --project ./tsconfig.json",
     "lint": "eslint . --ext .ts",
@@ -17,7 +15,6 @@
   "dependencies": {
     "body-parser": "^1.19.2",
     "express": "^4.17.3",
-    "json-server": "^0.17.0",
     "pg": "^8.7.3"
   },
   "devDependencies": {
