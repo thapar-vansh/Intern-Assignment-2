@@ -1,4 +1,4 @@
-import { getPlayerById } from '../services/adminService.js'
+import { getPlayerById } from '../services/adminService'
 import { Request, Response } from 'express'
 
 import {

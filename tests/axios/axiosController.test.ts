@@ -1,44 +1,65 @@
-import {
-  getRequest,
-  postRequest,
-  putRequest,
-  deleteRequest,
-} from '../../controllers/axiosController'
-import axios, { AxiosResponse } from 'axios'
+import supertest from 'supertest'
 import * as data from '../data/data.json'
+import { app } from '../../src/index'
 
-jest.mock('axios')
-const mockedAxios = axios as jest.Mocked<typeof axios>
+const request = supertest(app)
 
 describe('tests for axios', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
 
-  it('tests get request', async () => {
-    const mockedRes: AxiosResponse = data.getRequestSuccess
-    const mockGetRequest = mockedAxios.get.mockResolvedValue(mockedRes)
-    console.log(mockGetRequest)
-    const req: any = {}
-    const res: any = {
-      json: jest.fn(),
-      status: jest.fn(),
-    }
-    const result = getRequest(req, res)
-    expect(mockGetRequest).toHaveBeenCalledTimes(1)
-    expect(await result).toBe(data.getRequestSuccess)
+  it('test for get request results in success', async () => {
+    const res = await request.get('/axios/posts').send({ id: 1 })
+    expect(res.status).toBe(200)
+    expect(res.body).toStrictEqual(data.getRequestSuccess.data)
   })
 
-  it('tests post request', async () => {
-    const mockPostRequest = mockedAxios.post.mockResolvedValueOnce('Added post')
-    const req: any = {}
-    const res: any = {
-      json: jest.fn(),
-      status: jest.fn(),
-    }
+  it('test for get request results in failure', async () => {
+    const expectedResult = 'Request failed . Please try again after sometime.'
+    const res = await request.get('/axios/posts').send({ id: 600 })
+    expect(res.status).toBe(400)
+    expect(res.text).toStrictEqual(expectedResult)
+  })
 
-    const result = await postRequest(req, res)
-    expect(result).toBe(mockPostRequest)
-    expect(mockPostRequest).toBeCalledTimes(1)
+  it('test for post request results in success', async () => {
+    const expectedResult = 'Added post'
+    const res = await request
+      .post('/axios/posts')
+      .send({ id: 1, data: data.getRequestSuccess.data })
+    expect(res.status).toBe(200)
+    expect(res.text).toStrictEqual(expectedResult)
+  })
+
+  it('test for post request results in failure', async () => {
+    const expectedResult = 'Request failed . Please try again after sometime.'
+    const res = await request
+      .post('/axios/posts')
+      .send({ id: 1000, data: data.getRequestSuccess.data })
+    expect(res.status).toBe(400)
+    expect(res.text).toStrictEqual(expectedResult)
+  })
+
+  it('test for put request results in success', async () => {
+    const expectedResult = 'Updated post'
+    const res = await request
+      .put('/axios/posts')
+      .send({ id: 1, data: data.getRequestSuccess.data })
+    expect(res.status).toBe(200)
+    expect(res.text).toStrictEqual(expectedResult)
+  })
+
+  it('test for delete request results in success', async () => {
+    const expectedResult = 'Deleted post'
+    const res = await request.delete('/axios/posts').send({ id: 1 })
+    expect(res.status).toBe(200)
+    expect(res.text).toStrictEqual(expectedResult)
+  })
+
+  it('test for delete request results in failure', async () => {
+    const expectedResult = 'Request failed . Please try again after sometime.'
+    const res = await request.delete('/axios/posts').send({ id: 199 })
+    expect(res.status).toBe(400)
+    expect(res.text).toStrictEqual(expectedResult)
   })
 })

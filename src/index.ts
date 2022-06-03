@@ -6,7 +6,7 @@ import { router as userRoutes } from '../routes/userRoutes'
 import { router as adminRoutes } from '../routes/adminRoutes'
 import { router as axiosRoutes } from '../routes/axiosRoutes'
 
-const app = express()
+export const app = express()
 dotenv.config()
 
 const { API_PORT } = process.env
