@@ -6,7 +6,7 @@ export const getRequest = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const id = req.body.id
+    const id = req.params.id
     const response = await axios.get(
       `https://jsonplaceholder.typicode.com/posts/${id}`
     )
@@ -24,14 +24,13 @@ export const postRequest = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const id = req.body.data.id
+    const id = req.params.id
     const data = req.body.data
     await axios.post(`https://jsonplaceholder.typicode.com/posts/${id}`, data)
     return res.send('Added post')
   } catch (error) {
     console.log(error.response)
     return res
-
       .status(400)
       .send('Request failed . Please try again after sometime.')
   }
@@ -42,7 +41,7 @@ export const putRequest = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const id = req.body.id
+    const id = req.params.id
     const data = req.body
     await axios.put(`https://jsonplaceholder.typicode.com/posts/${id}`, data)
     return res.send('Updated post')
@@ -59,7 +58,7 @@ export const deleteRequest = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const id = req.body.id
+    const id = req.params.id
     await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
     return res.send('Deleted post')
   } catch (error) {

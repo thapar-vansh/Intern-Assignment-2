@@ -8,7 +8,7 @@ import {
 
 export const router: Router = express.Router()
 
-router.get('/posts', getRequest)
-router.post('/posts', postRequest)
-router.put('/posts', putRequest)
-router.delete('/posts', deleteRequest)
+router.get('/posts/:id', getRequest)
+router.post('/posts/:id', postRequest)
+router.put('/posts/:id', putRequest)
+router.delete('/posts/:id', deleteRequest)
