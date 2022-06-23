@@ -197,6 +197,27 @@
     "headers": {},
     "config": {}
   },
+  "getRequestFaiure": {
+    "data": {},
+    "status": 400,
+    "statusText": "Request failed . Please try again after sometime.",
+    "headers": {},
+    "config": {}
+  },
+  "postRequestSuccess": {
+    "data": {},
+    "status": 200,
+    "statusText": "Added post",
+    "headers": {},
+    "config": {}
+  },
+  "postRequestFailure": {
+    "data": {},
+    "status": 400,
+    "statusText": "Request failed . Please try again after sometime.",
+    "headers": {},
+    "config": {}
+  },
   "requestBody": {
     "userId": 1,
     "id": 1,
