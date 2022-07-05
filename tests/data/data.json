@@ -184,5 +184,44 @@
     ],
     "command": "SELECT",
     "fields": []
+  },
+  "getRequestSuccess": {
+    "data": {
+      "userId": 1,
+      "id": 1,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers": {},
+    "config": {}
+  },
+  "getRequestFaiure": {
+    "data": {},
+    "status": 400,
+    "statusText": "Request failed . Please try again after sometime.",
+    "headers": {},
+    "config": {}
+  },
+  "postRequestSuccess": {
+    "data": {},
+    "status": 200,
+    "statusText": "Added post",
+    "headers": {},
+    "config": {}
+  },
+  "postRequestFailure": {
+    "data": {},
+    "status": 400,
+    "statusText": "Request failed . Please try again after sometime.",
+    "headers": {},
+    "config": {}
+  },
+  "requestBody": {
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
   }
 }
